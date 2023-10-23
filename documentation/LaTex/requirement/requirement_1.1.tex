@@ -1,0 +1,68 @@
+\section{Requirements}
+\subsection{AI model}
+% 사용자의 사진을 입력받아 뇌졸중의 여부를 판단하는 인공지능이다. 사람의 얼굴 사진으로 미리 학습을 시킨다. 이후 웹 서버에 배포를 해서 API를 통해 사진을 보내면 인식할 수 있다. 추론을 학습된 데이터를 기반으로 진행해 결괏값을 다시 API로 전송해 임의의 사람의 얼굴에 대한 뇌줄중 여부를 Face drooping을 근거로 판단하는 인공지능 모델이다.
+It is an artificial intelligence that determines whether a stroke occurs by receiving a user's photo. Learn in advance with pictures of people's faces. Afterwards, you can recognize it by distributing it to a web server and sending a photo through the API. It is an artificial intelligence model that conducts reasoning based on learned data and transmits the result value back to the API to determine whether or not a brain line is drawn to a person's face based on Face drooping.
+
+\subsection{Web communication}
+% 웹 통신을 위해 다음과 같은 기능이 필요하다. AWS에 존재하는 인공지능 모델과 라즈베리 파이 사이의 통신을 지원한다. key, value로 이루어진 json 포맷으로 통신이 이루어지며 POST 방식으로 prdict가 이루어진다. 
+It is an API for web communication. This project supports communication between AWS' existing artificial intelligence model and Raspberry Pie. Communication is carried out in the json format consisting of key and value, and the prediction is carried out in the POST method.
+\subsubsection{Post}
+% 웹으로 Post 할 때는 사용자의 이미지가 전달된다. 이미지가 Post 명령에 의해 전달되고 인공지능 모델이 인식할 수 있다. 인공지능 모델이 인식할 수 있도록 이미지를 변환하는 과정은 구현의 일관성을 유지하기 위해 아래의 handler에서 실행된다.
+When posting on the web, the user's image is delivered. The image is delivered by post command and recognizable by the artificial intelligence model. The process of converting images so that artificial intelligence models can recognize them is executed in the handler below to maintain consistency in implementation.
+\subsubsection{Get}
+% 학습된 인공지능 모델이 Post된 자료를 받아 처리한 후 예측값을 다시 Raspberry Pi로 전해준다. 이 때, 값은 뇌졸중 가능성을 나타내는 확률값으로 정의된다. 단순히 0 또는 1로 판별하기에는 위험이 크다고 판단했기 때문이다.
+The learned artificial intelligence model receives and processes the posted data and delivers the predicted value back to Raspberry Pi. In this case, the value is defined as a probability value indicating a stroke probability. This is because it was judged that there was a high risk to simply distinguish it as 0 or 1.
+
+\subsection{AWS}
+% 인공지능 모델의 배포와 학습을 위한 서버이다. Ubuntu 기반의 x86-64로 구성되어 있다. EC2를 사용해 가상 인스턴스를 만들었으며 탄력적 IP로 접근 가능하도록 보안 설정을 했다.
+It is a server for distribution and learning of artificial intelligence models. It consists of Ubuntu-based x86-64. The virtual instance was created using EC2 and security settings were set to be accessible with Elastic IP.
+
+\subsection{Raspberry Pi}
+% 사용자의 사진을 촬영하는 카메라를 통제하고 촬영한 사진을 웹서버와 통신이 가능하게 한다. 인공지능 모델이 사진을 기반으로 뇌졸중 여부를 판단한 결과를 다시 받아 다시 사용자에게 알려주는 역할을 맡았다. 이 과정은 NUGU 스피커로 청각적으로나 Dashboard를 통해 시각적으로 표현이 가능하다.
+It controls the camera that takes a user's picture and enables communication with the web server. The artificial intelligence model took on the role of receiving the results of determining whether a stroke occurred based on pictures and notifying users again. This process can be expressed both audibly and visually through the Dashboard with NUGU speakers.
+
+\subsection{Tensorflow Serving}
+% Tensorflow를 기반으로 인공지능 모델을 개발했을 때, 배포를 간편하게 진행할 때 필요하다.
+When an artificial intelligence model is developed based on Tensorflow, it is necessary to easily proceed with distribution.
+
+\subsection{Handler}
+% 학습된 인공지능 모델이 웹 서버에 존재할 때 전송되는 이미지 자료를 판단할 수 있도록 변형하고 전처리하는 과정과 예측한 결괏값을 API를 통해 돌려주기 위해 문자열을 제작하는 과정의 집합체이다. 이 기능을 통해 인공지능 모델의 배포와 유지관리를 쉽게 할 수 있다.
+It is a collection of the process of transforming and preprocessing the image data transmitted when the learned artificial intelligence model exists on the web server and the process of producing strings to return the predicted result value through API. This function makes it easy to distribute and maintain artificial intelligence models.
+
+\subsection{Disable camera}
+% 사용자의 사진을 촬영하는 카메라로서 사용되지 않는 경우에는 작동이 불가능해야 한다. 개인정보 보호를 위해 카메라가 작동 중이면 맥북의 웹캠처럼 표시를 가능하게 하거나 zoom의 기능과 같이 주변부를 흐리게 처리할 수 있다.
+If it is not used as a camera to take a user's picture, it should be impossible to operate. If the camera is working for privacy protection, it can be displayed like a webcam on a MacBook or cloud the surroundings like a Zoom function.
+
+\subsection{NUGU}
+% 인공지능 스피커로 본 프로젝트에서는 라즈베리 파이에서 전송된 뇌졸중 여부를 사용자에게 청각적으로 전달할 수 있다. 이 외에 사용자가 원할 때 촬영을 시작하도록 trigger를 인식할 수 있다.
+In this project with an artificial intelligence speaker, it is possible to aurally transmit the stroke transmitted from the raspberry pie to the user. In addition, the trigger may be recognized so that the user starts photographing when desired.
+
+\subsection{Dashboard}
+% 뇌졸중 여부를 시각적으로 표현해준다. 라즈베리 파이에서 전송된 뇌졸중 여부와 확률, chatGPT로 작성한 건강에 관련된 유용한 정보를 사용자에게 시각적으로 보여준다. 유용한 정보의 예시는 다음과 같다. 뇌졸중에 도움이 되는 음식이나 생활습관, 만약 발병한다면 어떻게 해야 하는지에 대한 정보가 포함된다.
+It visually expresses whether you have a stroke. Visually shows the user useful information related to stroke and probability transmitted from raspberry pie, and health written by chatGPT. Examples of useful information are as follows. It includes information on food or lifestyle habits that help with a stroke, and what to do if it develops.
+\subsubsection{Possibility}
+% API를 통해 전송된 값에서 뇌졸중 여부의 확률값을 표현한다. 자동차의 속도 계기판을 모티브로 하여 사용자에게 직관적으로 확률을 전달한다.
+It expresses the probability value of stroke from the value transmitted through the API. It intuitively transmits probabilities to users by using the speed dashboard of the car as a motif.
+\subsubsection{User's image}
+% 사용자를 촬영한 사진을 보여준다. 이로써 사용자는 자신의 상태를 객관적으로 확인할 수 있으며 경각심을 일으킬 수 있다.
+Shows a photo of the user. As a result, the user can objectively check his or her state.
+\subsubsection{Cure}
+% 아래의 chatGPT를 통해 얻은 뇌졸중의 치료법을 보여주는 공간이다. 만약 사용자가 뇌졸중의 확률이 높을 경우에는 더욱 눈에 띄도록 표현할 수 있다.
+This is a space showing the treatment of stroke obtained through chatGPT below. If the user has a high probability of stroke, it can be expressed more prominently.
+\subsubsection{Preventive}
+% 아래의 chatGPT를 통해 얻은 뇌졸중의 예방법을 알려준다. 뇌졸중의 확률이 낮더라도 예방법을 사용자에게 알려주고, 만약 의심될 때는 어떻게 해야하는지 행동지침을 알린다. 이로써 능동적인 건강관리를 가능케 한다. 
+It tells users how to prevent stroke obtained through chatGPT below. Even if the probability of stroke is low, it informs the user of prevention and informs the behavioral guidelines on what to do if suspected. This enables active health care.
+
+\subsection{chatGPT}
+% 사용자의 뇌졸중 여부와 확률을 기반으로 유용한 정보를 생성해주는 생성형 AI이다. API를 이용해서 질문을 담아서 전송하고 답변을 다시 받아온다. 그 답변을 Dashboard 혹은 NUGU를 통해 사용자에게 알려준다. 
+It is a generative AI that generates useful information based on the user's stroke status and probability. It uses API to send questions and receive answers again. The answer is notified to the user through the Dashboard or NUGU.
+\subsubsection{Question}
+% chatGPT에게 뇌졸중 관련으로 질문할 때 피상적인 표현으로 한다면 당장 병원에 가야한다는 정보만 얻는다. 인공지능 모델이 반환한 결괏값에서 확률을 추출하고 치료법과 예방법, 병원을 어떻게 골라야하는지를 직접적으로 물어본다. 
+When I ask chatGPT about stroke, we only get information that I have to go to the hospital right away if we do it in a superficial way. It extracts probabilities from the results returned by the artificial intelligence model and directly asks how to choose treatments, prevention, and hospitals.
+\subsubsection{Answer}
+% 위의 질문 형식으로 chatGPT에게 질문하고 받은 대답이다. 이 대답은 Dashboard 혹은 NUGU로 전달되어 각각 시각적, 청각적인 표현으로 사용자에게 전달된다.
+This is the answer I received after I asked the chatGPT in the above question format. This answer is passed to the Dashboard or NUGU and is passed to the user in visual and auditory expressions, respectively.
+
+\subsection{Database}
+% 인공지능 모델의 정확도를 향상시키기 위해서 이미지를 보관하는 데이터베이스가 필요할 수 있다. 하지만 이는 개인정보로 민감할 수 있기에 데이터베이스 없이 프로젝트를 구현하는 것으로 진행할 수도 있다.
+In order to improve the accuracy of the artificial intelligence model, a database for storing images may be required. However, since this can be sensitive to personal information, the project can be implemented without a database.
