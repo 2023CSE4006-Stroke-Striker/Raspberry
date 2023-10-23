@@ -1,6 +1,6 @@
 # Project Title
 
-Storke Striker
+Storke Striker  
 (사람들이 매일 냉장고를 적어도 한번 이상 열어본다는 특징을 이용한 Daily active 뇌졸중 탐지기)
 
 
