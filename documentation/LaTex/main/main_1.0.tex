@@ -8,14 +8,14 @@
 \usepackage{textcomp}
 \usepackage{kotex}
 \usepackage{xcolor}
+\usepackage{listings}
 \usepackage{url}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
-
 \begin{document}
 
-\title{Stroke Striker\\}
+\title{Strike Stroke\\}
 
 \author{\IEEEauthorblockN{Lee Seungsu}
 \IEEEauthorblockA{\textit{dept. Computer Science} \\
@@ -52,20 +52,7 @@ jabbourryan2@gmail.com}
 % \end{abstract}
 
 \begin{abstract}
-    Our model is an "active" stroke detector-strike stroke. 
-Stroke is a representative acute severe disease that ranks as the \cite{r1} fourth cause of death in Korea and \cite{r2}the fifth cause of death in the United States. The sooner the better, but \cite{r3} It is most effective to remove blood clots within an hour, and if not, treatment should be done within up to 3 hours to reduce side effects. \\
-\\However, since CT, MRI scans, and diagnosis time after arriving at the hospital should be considered, \cite{r4} The golden time for stroke should be about an hour before arriving at the hospital. However, the time of stroke after the onset of prognostic symptoms cannot be predicted, so if you see prognostic symptoms, you should go to the hospital right away.
-\\Fortunately, \cite{r5} stroke has a reliable pre-hospital diagnostic method called BE-FAST (Balance, Eyes, Face, Arm, Speech, Terrible headache).  Among them, Face-facial expression changes caused by paralysis of facial muscles are very obvious, so you can make a relatively accurate diagnosis. \\
-\\We focus on that.
-\\Of course, there are currently many applications that can be used to diagnose themselves using this method. But they're all "passive" applications which you have to turn on the app and take pictures. \\
-\\The Point of this project lies in "active".  Home appliances, typically refrigerators and TVs, are used by facing with users. Especially in the case of refrigerators, we know empirically that everyone opens it once a day, even if there's no specific reason. According to a 2012 Consumer Electronics Industry Survey, a family of four opens the refrigerator on average 40 times a day and it means 10 times a day per person.
-Paying attention to this, \cite{r6} LG Electronics not only achieved great results with the design of "Magic Space" but also significantly reduced electricity use at home. \cite{r7}In addition, Americans open refrigerators an average of 33 times a day, according to ENERGY STAR, a U.S. environmental protection agency.\\
-\\We pay attention to these behaviors. The refrigerator is equipped with a camera module to recognize the facial expressions of the user when standing in front of the refrigerator. If stroke was detected, it informs the user right away. 
-Unbeknownst to us, the disease is diagnosed and even follows up. Active appliances protect our healthy lives in real-time. If this technology is applied to all home appliances, The house can no longer be a space for living, but a diagnostic center for each individual.
-You're worried about privacy? We've already prepared a countermeasure for this-.\\
-\\Our project is UP version of refrigerator.\\
-This is Innovation for a better life.
-It makes Life to be Good.
+ Stroke is an acute and severe disease worldwide ranked as the \cite{r1} fourth cause of death in South Korea and \cite{r2} the fifth cause of death in the United States of America.\\ \\ \cite{r3} The most effective time to remove the blood clots caused by this disease is within an hour of the stroke, but of course, the sooner, the better. Otherwise, treatment should be administered within at least three hours in order to minimize potential complications. Since the hospital needs to conduct an MRI and a CT scan for diagnosis, we can consider \cite{r4} the best time to arrive at the hospital after a stroke would be one hour. However, in case of the onset of prognostic symptoms, the time of stroke cannot be predicted, so it is recommended that you go to the hospital right away.\\ \\Fortunately, \cite{r5} stroke has a reliable pre-hospital diagnostic method called BE-FAST (Balance, Eyes, Face, Arm, Speech, Terrible headache). Facial expression changes caused by paralysis of facial muscles are a very obvious symptom of stroke to detect, so you can make a relatively accurate diagnosis about it.\\ \\That's where we're putting our focus.\\ \\Of course, there are currently many applications that can be used to diagnose patients using this method. But they're all "passive" applications where you should turn on the app and take pictures of yourself.\\ \\However, the importance of the software we're creating lies in the "active" part. Home appliances, typically refrigerators and TVs, are used daily by people. We know eventually that everyone opens their fridge at least once a day, even if there's no specific reason, or turn on their TV. According to a 2012 Consumer Electronics Industry Survey, a family of four opens the refrigerator on average 40 times a day and it means 10 times a day per person. Putting their attention on this stat, \cite{r6} LG Electronics not only achieved great results with the design of "Magic Space" but also significantly reduced electricity use at home. \cite{r7} In addition, Americans open their refrigerators an average of 33 times a day, according to ENERGY STAR, a program run by the U.S. Environmental Protection Agency and the U.S. Department of Energy.\\ \\Considering everything cited above, a brief intro of our project: the refrigerator would be equipped with a camera to scan the users' facial expressions when standing face to it. If a risk of stroke is detected, a speaker implemented informs the user of his condition right away.\\ \\If this health check service was supported by every home appliance, we could imagine a household that actively protects our health in real-time daily and not just a passive household that passively neglect dangerous health issues.
 \end{abstract}
 
 %\begin{IEEEkeywords}
@@ -74,19 +61,20 @@ It makes Life to be Good.
 
 \begin{table}[h]
     \caption{a list of role assignment}
-    \begin{tabular}{|c|c|p{3.0cm}|}
+    \begin{tabular}{|p{2.6cm}|p{1.7cm}|p{3.4cm}|}
     \hline
-    Roles & Name & Task Description \\ \hline
-      Development Manager    & Lee Seungsu    &  Lee Seungsu was responsible for designing the overall concept of the software and finding the basis for various claims.         \\ \hline
-      Software Development    & Park Geonryul  &  Park Geonryul was in charge of the actual implementation of systems and machine learning. In addition, a basic framework for document creation was created. \\ \hline
-        Customer  &   Elia Ayoub   &  As a customer, Elia uses the designed products and services produced by the team and delivers an objective feedback accordingly.          \\ \hline
-        Document Analysis  &    Ryan Jabbour  &   Ryan was given the task of checking all the documentation to present and the logical development of the project.            \\ \hline
+    Role & Name & Task Description \\ \hline
+      Development Manager & Lee Seungsu & Lee Seungsu was responsible for designing the overall concept of the software and finding the basis for various claims.\\ \hline
+      Software Development & Park Geonryul & Park Geonryul was in charge of the actual implementation of systems as well as machine learning.\\ \hline
+      Customer & Elia Ayoub & Elia, as a customer and user of the products and servies provided by the team, had to deliver an objective feedback on them accordingly.\\ \hline
+      Project Analysis & Ryan Jabbour & Ryan was given the task of checking all the documentation to present and the logical development process of the project.\\ \hline
     \end{tabular}
     \end{table}
 
 \input{intro/intro_1.0.tex}
-\input{requirement/requirement_1.1}
-
+\input{requirement/req_2.0}
+\input{development environment/dev_env_1.0}
+\input{specifications/spec_1.0}
 
 
 
