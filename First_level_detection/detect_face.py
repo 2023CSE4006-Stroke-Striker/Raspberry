@@ -29,7 +29,24 @@ def process_face(frame, face):
         cv2.circle(frame, left_mouth_corner, 2, (0, 255, 0), -1)
         cv2.circle(frame, right_mouth_corner, 2, (0, 255, 0), -1)
 
-        #show the process in frame
+        #show the process in voice
+        if abs(lip_height) > 0.25:
+            print('mvalue: ', abs(lip_height))
+            alert.synthesize_and_play("Stroke symtoms has been detected. please look at the camera for 5 seconds")
+            #clock.countdown(frame, 0)
+            for i in range(5, 0, -1):
+                print(f'Countdown: {i} seconds')
+                cv2.waitKey(1000)
+            photo.take_photo(frame)
+            alert.synthesize_and_play("The AI model is currently analyzing the image. Please wait a moment.")
+            #clock.countdown(frame, 1)
+            for i in range(5, 0, -1):
+                print(f'Countdown: {i} seconds')
+                cv2.waitKey(1000)
+            send.main("arn:aws:rekognition:ap-northeast-2:464499631690:project/stroke-nostroke-classification/version/stroke-nostroke-classification.2023-11-25T12.38.57/1700883537519", "/home/seungsu/pyvenv/Raspberry/First_level_detection/captured_image_0.jpg")
+            
+            
+             #show the process in frame
         # if abs(lip_height) > 0.25:
         #     print('mvalue: ', abs(lip_height))
         #     cv2.putText(frame, 'Mouth Corner Dropped!', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2, cv2.LINE_AA)
@@ -44,18 +61,3 @@ def process_face(frame, face):
         #         cv2.waitKey(1000)
         #     send.main("arn:aws:rekognition:ap-northeast-2:464499631690:project/stroke-nostroke-classification/version/stroke-nostroke-classification.2023-11-25T12.38.57/1700883537519", "/home/seungsu/pyvenv/Raspberry/First_level_detection/captured_image_0.jpg")
         
-        #show the process in voice
-        if abs(lip_height) > 0.25:
-            print('mvalue: ', abs(lip_height))
-            alert.synthesize_and_play("Stroke symtoms has been detected. please look at the camera for 5 seconds")
-            clock.countdown(frame, 0)
-            for i in range(5, 0, -1):
-                print(f'Countdown: {i} seconds')
-                cv2.waitKey(1000)
-            photo.take_photo(frame)
-            alert.synthesize_and_play("The AI model is currently analyzing the image. Please wait a moment.")
-            clock.countdown(frame, 1)
-            for i in range(5, 0, -1):
-                print(f'Countdown: {i} seconds')
-                cv2.waitKey(1000)
-            send.main("arn:aws:rekognition:ap-northeast-2:464499631690:project/stroke-nostroke-classification/version/stroke-nostroke-classification.2023-11-25T12.38.57/1700883537519", "/home/seungsu/pyvenv/Raspberry/First_level_detection/captured_image_0.jpg")
