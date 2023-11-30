@@ -1,4 +1,8 @@
 import requests
+# import google.generativeai as palm  (pip install google-generativeai)
+# from gtts import gTTS            (pip install gTTS)
+# from API_KEY import API_KEY
+# from playsound import playsound (pip install playsound)
 
 def image_send(): 
     # FastAPI 서버의 엔드포인트 URL
@@ -33,4 +37,14 @@ def image_send():
     else:
         print("Stroke is detected !")
         print("Accuracy: ", probability_1)
+        '''
+        palm.configure(api_key=API_KEY)
+        prompt = "say to someone that he is having a stroke"  # we can optimize this by selecting the best prompt for our scenario
+        response = palm.generate_text(prompt=prompt)
+        response = response.result.replace('*', ' ') 
+        print(response)
+        tts = gTTS(response)
+        tts.save('speech.mp3')
+        playsound("speech.mp3")
+        '''
         return 1
