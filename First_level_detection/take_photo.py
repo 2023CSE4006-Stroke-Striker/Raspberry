@@ -6,3 +6,5 @@ def take_photo(frame):
     filename = f'captured_image_0.jpg'
     cv2.imwrite(filename, frame)
     print(f'Photo saved as {filename}')
+    
+    

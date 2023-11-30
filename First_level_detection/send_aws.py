@@ -14,15 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 def analyze_local_image(rek_client, model, photo, min_confidence):
-    """
-    Analyzes an image stored as a local file.
-    :param rek_client: The Amazon Rekognition Boto3 client.
-    :param s3_connection: The Amazon S3 Boto3 S3 connection object.
-    :param model: The ARN of the Amazon Rekognition Custom Labels model that you want to use.
-    :param photo: The name and file path of the photo that you want to analyze.
-    :param min_confidence: The desired threshold/confidence for the call.
-    """
-
+    
     try:
         logger.info("Analyzing local file: %s", photo)
         image = Image.open(photo)
